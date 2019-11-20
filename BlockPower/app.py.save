@@ -1,0 +1,29 @@
+from flask import*
+
+app = Flask(__name__)
+
+PIN = 18
+PIN2 = 23
+second = 2
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(PIN, GPIO.OUT)
+GPIO.setup(PIN2, GPIO.OUT)
+
+@app.route("/led_on", methods=["POST"])
+def led_on():
+	print("LED on")
+	return GPIO.output(p, GPIO.HIGH)
+
+@app.route("/led_off", methods = ["POST"])
+def led_off():
+	print("LED off")
+	return GPIO.output(p2, GPIO.LOW)
+
+@app.route("/", methods=["GET"])
+def home():
+	return render_template("button.html", title="Button", name="Kile Pilgrim")
+
+
+
